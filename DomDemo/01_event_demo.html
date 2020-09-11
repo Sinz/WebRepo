@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01_eventdemo</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background: antiquewhite;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="box"></div>
+
+
+    <script>
+
+        /*
+        *   1. 事件源： 引发后续事件的标签
+        *   2. 事件： js中定义的event；onclick / onchange / ondbclick / onfocus / onmouseover / onmouseout / onkeyup / onkeydown / onmouseup / oncontextmenu
+        *   3. 事件驱动程序： dom操作
+        *
+        *   点击box弹出对话框
+        *   1. 获取事件源
+        *   2. 绑定事件
+        *   3. 编辑事件驱动程序
+        *
+        * */
+
+        var boxClick = document.getElementById("box");
+        boxClick.onclick = function () {
+            alert(1);
+        };
+
+    </script>
+</body>
+</html>
