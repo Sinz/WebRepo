@@ -1,10 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>04_event_testcase</title>
+    <style>
+        .top-nanner {
+            background-color: pink;
+            height: 80px;
+        }
+
+        .w {
+            width: 1210px;
+            margin: 10px auto;
+            position: relative;
+        }
+
+        img {
+            width: 1210px;
+            height: 80px;
+            background-color: aqua;
+        }
+
+        a {
+            text-decoration: none;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            color: #fff;
+            width: 20px;
+            height: 20px;
+            font: 700 14px/20px "simsum";
+            text-align: center;
+        }
+
+        .hide {
+            display: none!important;
+        }
+
+        .no1 {
+            width: 200px;
+            height: 200px;
+            background-color: #ff00ff;
+        }
+        .no2 {
+            width: 100px;
+            height: 100px;
+            background-color: #ff0000;
+        }
+    </style>
 </head>
 <body>
-$END$
+
+    <div class="top-nanner" id="topBanner">
+        <div class="w">
+            <img src="" alt="">
+            <a href="#" id="closeBanner">x</a>
+        </div>
+    </div>
+
+    <div class="no1">
+        <div class="no2">
+
+        </div>
+    </div>
+
+
+    <script> // 点击a连接，隐藏盒子top-banner
+
+        // 1. 获取事件源 和 相关标签
+        var closeBanner = document.getElementById("closeBanner");
+        var topBanner = document.getElementById("topBanner");
+        // 2. 绑定事件
+        closeBanner.onclick = function () {
+            // 3. 编辑事件驱动
+            console.log("close !");
+            // topBanner.className += " hide";
+            topBanner.style.display = "none";
+        }
+
+
+    </script>
 </body>
 </html>
