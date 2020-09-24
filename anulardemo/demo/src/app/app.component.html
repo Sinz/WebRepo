@@ -1,0 +1,76 @@
+<!--
+ * @Since: 2020-09-22 23:15:24
+ * @LastEditTime: 2020-09-25 00:51:16
+ * @LastEditors: Zhao.J
+ * @FilePath: \anulardemo\demo\src\app\app.component.html
+ * @Description: 模板
+-->
+
+
+<section class="todoapp">
+    <header class="header">
+        <h1>todos</h1>
+        <input class="new-todo" placeholder="What needs to be done?" autofocus (keyup.enter)="addTodo($event)">
+    </header>
+
+    <ng-template [ngIf]="todos.length">
+        <section class="main">
+            <!-- 事件处理都是（） ， 动态属性绑定都是[] -->
+            <input id="toggle-all" class="toggle-all" type="checkbox" (change)="toggleAll = $event.target.checked" [checked]="toggleAll">
+            <label for="toggle-all">Mark all as complete</label>
+            <ul class="todo-list">
+                <!-- These are here just to show the structure of the list items -->
+                <!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
+                <!-- 
+                    li 就是一个任务项
+                    每个任务项都有三种状态： 正常状态（无样式） / 完成（completed）/ 编辑状态 (editing)
+                 -->
+                <li *ngFor="let todo of filterTodos;let i = index;" [ngClass]="{completed: todo.done,editing:currentEditing === todo}">
+                    <div class="view">
+                        <!-- 双向绑定 -->
+                        <input class="toggle" type="checkbox" [(ngModel)]="todo.done">
+                        <label (dblclick)="currentEditing = todo">{{ todo.title }}</label>
+                        <button class="destroy" (click)="removeTodo(i)"></button>
+                    </div>
+                    <input class="edit" [value]="todo.title" (blur)="saveEdit(todo,$event)" (keyup)="handleEditKeyup($event)" (keyup.enter)="saveEdit(todo,$event) ">
+                </li>
+            </ul>
+        </section>
+        <!-- This footer should hidden by default and shown when there are todos -->
+        <footer class="footer">
+            <!-- This should be `0 items left` by default -->
+            <span class="todo-count"><strong>{{remaningCount}}</strong> item left</span>
+            <!-- Remove this if you don't implement routing -->
+            <!-- 
+                实现导航切换过滤的功能
+                1. 提供一个属性filterTodos，该属性会根据当前点击的链接，返回过滤之后的数据
+                2. 提供一个属性visibility(all,active,completed),存储当前点击的链接标识
+                3. 为链接添加点击事件，当点击导航链接的时候，改变
+            
+            -->
+            <ul class="filters">
+                <li>
+                    <a [ngClass]="{'selected': visibility === 'all'}" href="#/">All</a>
+                </li>
+                <li>
+                    <a [ngClass]="{'selected': visibility === 'active'}" href="#/active">Active</a>
+                </li>
+                <li>
+                    <a [ngClass]="{'selected': visibility === 'completed'}" href="#/completed">Completed</a>
+                </li>
+            </ul>
+            <!-- Hidden if no completed items are left ↓ -->
+            <button class="clear-completed" (click)="clearAllDone()">Clear completed</button>
+        </footer>
+    </ng-template>
+    <!-- This section should be hidden by default and shown when there are todos -->
+
+</section>
+<footer class="info">
+    <p>Double-click to edit a todo</p>
+    <!-- Remove the below line ↓ -->
+    <p>Template by <a href="http://sindresorhus.com">Sindre Sorhus</a></p>
+    <!-- Change this out with your name and url ↓ -->
+    <p>Created by <a href="http://todomvc.com">you</a></p>
+    <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+</footer>
