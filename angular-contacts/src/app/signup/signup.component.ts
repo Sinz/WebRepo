@@ -1,6 +1,6 @@
 /*
  * @Since: 2020-09-26 00:53:31
- * @LastEditTime: 2020-09-26 23:28:22
+ * @LastEditTime: 2020-09-27 00:56:21
  * @LastEditors: Zhao.J
  * @FilePath: \angular-contacts\src\app\signup\signup.component.ts
  * @Description: 
@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent implements OnInit {
 
-  signupForm = {
+  signForm = {
     email: '',
     password: ''
   }
@@ -39,11 +39,15 @@ export class SignupComponent implements OnInit {
     // 3. 发起http 请求和服务端交互
     // 4. 根据响应结果做交互处理
 
-    const formData = this.signupForm;
+    const formData = this.signForm;
     this.http.post(
       'http://localhost:3000/users',
       formData
-      ).toPromise().then(data => {console.log(data);this.error_email_msg = '';this.router.navigate(['/'])})
+      ).toPromise().then((data: any) => {console.log(data);this.error_email_msg = '';
+      window.localStorage.setItem('auth_token',data.token);
+      window.localStorage.setItem('user_info',JSON.stringify(data.user));
+      this.router.navigate(['/'])
+    })
       .catch(err => {
       if(err.status === 409){
         this.error_email_msg = '邮箱已被注册'

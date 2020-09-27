@@ -1,6 +1,6 @@
 /*
  * @Since: 2020-09-26 00:42:41
- * @LastEditTime: 2020-09-26 21:59:21
+ * @LastEditTime: 2020-09-27 21:31:55
  * @LastEditors: Zhao.J
  * @FilePath: \angular-contacts\src\app\app.module.ts
  * @Description: 
@@ -9,6 +9,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { GlobalInterceptor } from './global.interceptor'
+import { HTTP_INTERCEPTORS } from '@angular/common/http'
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -46,7 +48,7 @@ import { LayoutComponent } from './layout/layout.component';
     FormsModule, //angular9 新特性中可以直接使用 FormsModule，ngForm被ng-form取代
     HttpClientModule,
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: GlobalInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,20 +1,20 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h2 class="sub-header">编辑联系人</h2>
     <div class="table-responsive">
-        <form>
+        <form (submit)="editContact()">
             <div class="form-group">
-                <label for="exampleInputEmail1">姓名</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                <label for="name">姓名</label>
+                <input type="name" class="form-control" id="name" placeholder="name" name="name" [(ngModel)]="formData.name">
             </div>
             <div class="form-group">
-                <label for="exampleInputEmail1">邮箱</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                <label for="email">邮箱</label>
+                <input type="email" class="form-control" id="email" placeholder="Email" name="email" [(ngModel)]="formData.email">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">电话</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <label for="phone">电话</label>
+                <input type="phone" class="form-control" id="phone" placeholder="phone" name="phone" [(ngModel)]="formData.phone">
             </div>
-            <button type="submit" class="btn btn-info">创建</button>
+            <button type="submit" class="btn btn-info">保存</button>
         </form>
     </div>
 </div>

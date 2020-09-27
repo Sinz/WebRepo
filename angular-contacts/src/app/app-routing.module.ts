@@ -5,9 +5,10 @@ import { ContactListComponent } from './contact-list/contact-list.component';
 import { LayoutComponent } from './layout/layout.component';
 import { ContactEditComponent } from "./contact-edit/contact-edit.component";
 import { ContactNewComponent } from "./contact-new/contact-new.component";
+import { AuthGuard } from './auth.guard';
 /*
  * @Since: 2020-09-26 00:42:41
- * @LastEditTime: 2020-09-26 16:15:34
+ * @LastEditTime: 2020-09-27 23:16:04
  * @LastEditors: Zhao.J
  * @FilePath: \angular-contacts\src\app\app-routing.module.ts
  * @Description: 
@@ -22,11 +23,13 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: '/contacts',
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'contacts',
     component: LayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -37,7 +40,7 @@ const routes: Routes = [
         component: ContactNewComponent
       },
       {
-        path: 'edit',
+        path: 'edit/:id',
         component: ContactEditComponent
       }
     ]
@@ -53,6 +56,7 @@ const routes: Routes = [
   {
     path: 'tags',
     component: LayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
